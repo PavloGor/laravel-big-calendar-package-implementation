@@ -23,7 +23,7 @@ return [
     */
     'event_colors' => [
         'blue',
-        'green', 
+        'green',
         'red',
         'yellow',
         'purple',

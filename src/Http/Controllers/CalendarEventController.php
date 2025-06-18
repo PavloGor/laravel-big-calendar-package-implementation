@@ -2,14 +2,14 @@
 
 namespace OpenHands\BigCalendar\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use OpenHands\BigCalendar\Models\CalendarEvent;
 use OpenHands\BigCalendar\Http\Requests\StoreEventRequest;
 use OpenHands\BigCalendar\Http\Requests\UpdateEventRequest;
 use OpenHands\BigCalendar\Http\Resources\CalendarEventResource;
-use Carbon\Carbon;
+use OpenHands\BigCalendar\Models\CalendarEvent;
 
 class CalendarEventController extends Controller
 {
@@ -25,7 +25,7 @@ class CalendarEventController extends Controller
         }
 
         // Filter by users
-        if ($request->has('user_ids') && !empty($request->user_ids)) {
+        if ($request->has('user_ids') && ! empty($request->user_ids)) {
             $userIds = is_array($request->user_ids) ? $request->user_ids : explode(',', $request->user_ids);
             $query->whereIn('user_id', $userIds);
         }
