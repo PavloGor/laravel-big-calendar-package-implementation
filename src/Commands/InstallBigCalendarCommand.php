@@ -18,7 +18,7 @@ class InstallBigCalendarCommand extends Command
         // Publish migrations
         $this->call('vendor:publish', [
             '--provider' => 'OpenHands\BigCalendar\BigCalendarServiceProvider',
-            '--tag' => 'big-calendar-migrations'
+            '--tag' => 'big-calendar-migrations',
         ]);
 
         // Run migrations
@@ -28,7 +28,7 @@ class InstallBigCalendarCommand extends Command
         // Publish config
         $this->call('vendor:publish', [
             '--provider' => 'OpenHands\BigCalendar\BigCalendarServiceProvider',
-            '--tag' => 'big-calendar-config'
+            '--tag' => 'big-calendar-config',
         ]);
 
         // Seed data if requested

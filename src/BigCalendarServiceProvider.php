@@ -2,9 +2,9 @@
 
 namespace OpenHands\BigCalendar;
 
+use OpenHands\BigCalendar\Commands\InstallBigCalendarCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use OpenHands\BigCalendar\Commands\InstallBigCalendarCommand;
 
 class BigCalendarServiceProvider extends PackageServiceProvider
 {
@@ -20,7 +20,7 @@ class BigCalendarServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasMigrations([
                 'create_calendar_users_table',
-                'create_calendar_events_table'
+                'create_calendar_events_table',
             ])
             ->hasCommand(InstallBigCalendarCommand::class);
     }

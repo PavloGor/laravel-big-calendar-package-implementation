@@ -2,10 +2,10 @@
 
 namespace OpenHands\BigCalendar\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Carbon\Carbon;
 use OpenHands\BigCalendar\Database\Factories\CalendarEventFactory;
 
 class CalendarEvent extends Model
@@ -40,17 +40,19 @@ class CalendarEvent extends Model
 
     public function getIsMultiDayAttribute(): bool
     {
-        if (!$this->start_date || !$this->end_date) {
+        if (! $this->start_date || ! $this->end_date) {
             return false;
         }
+
         return $this->start_date->format('Y-m-d') !== $this->end_date->format('Y-m-d');
     }
 
     public function getDurationMinutesAttribute(): int
     {
-        if (!$this->start_date || !$this->end_date) {
+        if (! $this->start_date || ! $this->end_date) {
             return 0;
         }
+
         return $this->start_date->diffInMinutes($this->end_date);
     }
 
@@ -58,11 +60,11 @@ class CalendarEvent extends Model
     {
         return $query->where(function ($q) use ($start, $end) {
             $q->whereBetween('start_date', [$start, $end])
-              ->orWhereBetween('end_date', [$start, $end])
-              ->orWhere(function ($q2) use ($start, $end) {
-                  $q2->where('start_date', '<=', $start)
-                     ->where('end_date', '>=', $end);
-              });
+                ->orWhereBetween('end_date', [$start, $end])
+                ->orWhere(function ($q2) use ($start, $end) {
+                    $q2->where('start_date', '<=', $start)
+                        ->where('end_date', '>=', $end);
+                });
         });
     }
 
@@ -79,11 +81,11 @@ class CalendarEvent extends Model
     public function toArray()
     {
         $array = parent::toArray();
-        
+
         // Format dates for frontend compatibility
         $array['startDate'] = $this->start_date->toISOString();
         $array['endDate'] = $this->end_date->toISOString();
-        
+
         return $array;
     }
 

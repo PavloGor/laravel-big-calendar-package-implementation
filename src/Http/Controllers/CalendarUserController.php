@@ -4,8 +4,8 @@ namespace OpenHands\BigCalendar\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
-use OpenHands\BigCalendar\Models\CalendarUser;
 use OpenHands\BigCalendar\Http\Resources\CalendarUserResource;
+use OpenHands\BigCalendar\Models\CalendarUser;
 
 class CalendarUserController extends Controller
 {

@@ -2,10 +2,10 @@
 
 namespace OpenHands\BigCalendar;
 
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use OpenHands\BigCalendar\Models\CalendarEvent;
 use OpenHands\BigCalendar\Models\CalendarUser;
-use Illuminate\Support\Collection;
-use Carbon\Carbon;
 
 class BigCalendar
 {
@@ -21,7 +21,7 @@ class BigCalendar
             $query->where('end_date', '<=', $filters['end_date']);
         }
 
-        if (isset($filters['user_ids']) && !empty($filters['user_ids'])) {
+        if (isset($filters['user_ids']) && ! empty($filters['user_ids'])) {
             $query->whereIn('user_id', $filters['user_ids']);
         }
 
@@ -41,6 +41,7 @@ class BigCalendar
     {
         $event = CalendarEvent::findOrFail($id);
         $event->update($data);
+
         return $event->fresh();
     }
 

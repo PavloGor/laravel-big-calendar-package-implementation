@@ -13,7 +13,7 @@ class CalendarEventFactory extends Factory
     public function definition(): array
     {
         $startDate = $this->faker->dateTimeBetween('now', '+1 month');
-        $endDate = (clone $startDate)->modify('+' . $this->faker->numberBetween(1, 4) . ' hours');
+        $endDate = (clone $startDate)->modify('+'.$this->faker->numberBetween(1, 4).' hours');
 
         return [
             'title' => $this->faker->sentence(3),
@@ -45,7 +45,7 @@ class CalendarEventFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             $startDate = $this->faker->dateTimeBetween('now', '+1 month');
-            $endDate = (clone $startDate)->modify('+' . $this->faker->numberBetween(1, 5) . ' days');
+            $endDate = (clone $startDate)->modify('+'.$this->faker->numberBetween(1, 5).' days');
 
             return [
                 'start_date' => $startDate,
