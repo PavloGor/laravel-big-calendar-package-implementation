@@ -215,7 +215,7 @@ The package includes comprehensive tests covering:
 
 ## 📖 Frontend Integration
 
-This package is designed to work with the [Big Calendar frontend](https://github.com/PavloGor/big-calendar). Update your frontend API configuration to point to these endpoints:
+This package is designed to work with the [Big Calendar frontend]([https://github.com/PavloGor/big-calendar](https://github.com/lramos33/big-calendar). Update your frontend API configuration to point to these endpoints:
 
 ```javascript
 // Example frontend configuration
@@ -282,7 +282,7 @@ That's it! You now have a fully functional calendar API ready to integrate with 
 
 - **Documentation**: See the `PACKAGE_SUMMARY.md` file for detailed documentation
 - **Issues**: [GitHub Issues](https://github.com/PavloGor/laravel-big-calendar-package-implementation/issues)
-- **Frontend**: [Big Calendar](https://github.com/PavloGor/big-calendar)
+- **Frontend**: [Big Calendar]([https://github.com/PavloGor/big-calendar](https://github.com/lramos33/big-calendar)
 
 ---
 
