@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('calendar_events', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->datetime('start_date');
+            $table->datetime('end_date');
+            $table->enum('color', ['blue', 'green', 'red', 'yellow', 'purple', 'orange', 'gray'])->default('blue');
+            $table->foreignId('user_id')->constrained('calendar_users')->onDelete('cascade');
+            $table->boolean('all_day')->default(false);
+            $table->timestamps();
+
+            $table->index(['start_date', 'end_date']);
+            $table->index(['user_id']);
+            $table->index(['color']);
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('calendar_events');
+    }
+};
