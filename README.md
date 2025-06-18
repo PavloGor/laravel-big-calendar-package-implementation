@@ -1,93 +1,292 @@
-# :package_description
+# Laravel Big Calendar Package
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/openhands/laravel-big-calendar.svg?style=flat-square)](https://packagist.org/packages/openhands/laravel-big-calendar)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/PavloGor/laravel-big-calendar-package-implementation/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/PavloGor/laravel-big-calendar-package-implementation/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/PavloGor/laravel-big-calendar-package-implementation/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/PavloGor/laravel-big-calendar-package-implementation/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/openhands/laravel-big-calendar.svg?style=flat-square)](https://packagist.org/packages/openhands/laravel-big-calendar)
 
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+A comprehensive Laravel 12 package that provides complete backend API functionality for calendar applications. Designed to work seamlessly with the [Big Calendar frontend](https://github.com/PavloGor/big-calendar).
 
-## Support us
+## 🚀 Features
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
+### 📅 Calendar Management
+- **Event CRUD Operations**: Complete event management with validation
+- **User Management**: User system with automatic avatar generation
+- **Drag & Drop Support**: API endpoints for moving and resizing events
+- **Multi-day Events**: Support for single and multi-day events
+- **Event Filtering**: Filter by date ranges, users, and custom criteria
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+### 🎨 Customization
+- **Event Colors**: Multiple color options for events
+- **Badge Variants**: Support for dot, colored, and mixed badge displays
+- **Working Hours**: Configurable business hours with distinct styling
+- **Time Zones**: Full timezone support with Carbon integration
 
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+### 🌐 API Features
+- **RESTful API**: Clean, consistent API endpoints
+- **JSON Resources**: Structured API responses
+- **Validation**: Comprehensive request validation
+- **Error Handling**: Proper error responses and status codes
 
-## Installation
+### 🔧 Developer Experience
+- **Easy Installation**: One-command installation via Artisan
+- **Sample Data**: Optional seeding with realistic sample data
+- **Comprehensive Tests**: Full test suite with Pest framework
+- **Documentation**: Complete API documentation and examples
+
+## 📦 Installation
 
 You can install the package via composer:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require openhands/laravel-big-calendar
 ```
 
-You can publish and run the migrations with:
+Run the installation command:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
-php artisan migrate
+php artisan big-calendar:install
+```
+
+Optionally, seed with sample data:
+
+```bash
+php artisan big-calendar:install --seed
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-config"
+php artisan vendor:publish --tag="big-calendar-config"
 ```
 
-This is the contents of the published config file:
+## 🌐 API Endpoints
+
+### Events Management
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/big-calendar/events` | List all events with filtering |
+| `POST` | `/api/big-calendar/events` | Create a new event |
+| `GET` | `/api/big-calendar/events/{id}` | Get specific event |
+| `PUT` | `/api/big-calendar/events/{id}` | Update event |
+| `DELETE` | `/api/big-calendar/events/{id}` | Delete event |
+| `POST` | `/api/big-calendar/events/{id}/move` | Move event (drag & drop) |
+| `POST` | `/api/big-calendar/events/{id}/resize` | Resize event |
+
+### Users Management
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/big-calendar/users` | List all users |
+| `GET` | `/api/big-calendar/users/{id}` | Get specific user |
+
+## 📊 API Examples
+
+### Create Event
+
+```bash
+curl -X POST /api/big-calendar/events \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Team Meeting",
+    "description": "Weekly team sync",
+    "start_date": "2025-06-20 10:00:00",
+    "end_date": "2025-06-20 11:00:00",
+    "color": "blue",
+    "all_day": false,
+    "user_id": 1
+  }'
+```
+
+### Response Format
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "title": "Team Meeting",
+    "description": "Weekly team sync",
+    "startDate": "2025-06-20T10:00:00.000000Z",
+    "endDate": "2025-06-20T11:00:00.000000Z",
+    "color": "blue",
+    "allDay": false,
+    "isMultiDay": false,
+    "durationMinutes": 60,
+    "user": {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "avatarUrl": "https://ui-avatars.com/api/?name=JD&background=random",
+      "isActive": true
+    }
+  },
+  "message": "Event created successfully"
+}
+```
+
+### Filter Events
+
+```bash
+# Filter by date range
+GET /api/big-calendar/events?start_date=2025-06-01&end_date=2025-06-30
+
+# Filter by user
+GET /api/big-calendar/events?user_id=1
+
+# Combined filters
+GET /api/big-calendar/events?start_date=2025-06-01&end_date=2025-06-30&user_id=1
+```
+
+### Move Event (Drag & Drop)
+
+```bash
+curl -X POST /api/big-calendar/events/1/move \
+  -H "Content-Type: application/json" \
+  -d '{
+    "start_date": "2025-06-21 10:00:00",
+    "end_date": "2025-06-21 11:00:00"
+  }'
+```
+
+## ⚙️ Configuration
+
+The package configuration file `config/big-calendar.php` provides extensive customization options:
 
 ```php
 return [
+    // Database table names
+    'tables' => [
+        'users' => 'calendar_users',
+        'events' => 'calendar_events',
+    ],
+
+    // API configuration
+    'api' => [
+        'prefix' => 'big-calendar',
+        'middleware' => ['api'],
+    ],
+
+    // Event colors
+    'colors' => [
+        'blue', 'green', 'red', 'yellow', 'purple', 'pink', 'orange', 'gray'
+    ],
+
+    // Calendar views
+    'views' => [
+        'agenda' => true,
+        'year' => true,
+        'month' => true,
+        'week' => true,
+        'day' => true,
+    ],
+
+    // Working hours
+    'working_hours' => [
+        'start' => '09:00',
+        'end' => '17:00',
+        'days' => [1, 2, 3, 4, 5], // Monday to Friday
+    ],
+
+    // Default settings
+    'defaults' => [
+        'event_duration' => 60, // minutes
+        'color' => 'blue',
+        'all_day' => false,
+    ],
 ];
 ```
 
-Optionally, you can publish the views using
+## 🧪 Testing
+
+Run the tests with:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-views"
+./vendor/bin/pest
 ```
 
-## Usage
+The package includes comprehensive tests covering:
+- Event CRUD operations
+- User management
+- API endpoints
+- Model relationships
+- Validation rules
 
-```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
+## 📖 Frontend Integration
+
+This package is designed to work with the [Big Calendar frontend](https://github.com/PavloGor/big-calendar). Update your frontend API configuration to point to these endpoints:
+
+```javascript
+// Example frontend configuration
+const API_BASE_URL = 'http://your-laravel-app.com/api/big-calendar';
+
+// Fetch events
+const events = await fetch(`${API_BASE_URL}/events?start_date=2025-06-01&end_date=2025-06-30`);
+
+// Create event
+const newEvent = await fetch(`${API_BASE_URL}/events`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    title: 'New Event',
+    start_date: '2025-06-20 10:00:00',
+    end_date: '2025-06-20 11:00:00',
+    user_id: 1
+  })
+});
 ```
 
-## Testing
-
-```bash
-composer test
-```
-
-## Changelog
+## 🔄 Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Contributing
+## 🤝 Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-## Security Vulnerabilities
+## 🔒 Security Vulnerabilities
 
 Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
-## Credits
+## 📄 Credits
 
-- [:author_name](https://github.com/:author_username)
+- [OpenHands AI](https://github.com/openhands)
+- [Spatie Package Skeleton](https://github.com/spatie/package-skeleton-laravel)
 - [All Contributors](../../contributors)
 
-## License
+## 📜 License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+---
+
+## 🚀 Quick Start Example
+
+Here's a complete example of setting up and using the package:
+
+```bash
+# 1. Install the package
+composer require openhands/laravel-big-calendar
+
+# 2. Install and seed
+php artisan big-calendar:install --seed
+
+# 3. Test the API
+curl http://your-app.com/api/big-calendar/events
+```
+
+That's it! You now have a fully functional calendar API ready to integrate with your frontend.
+
+## 📞 Support
+
+- **Documentation**: See the `PACKAGE_SUMMARY.md` file for detailed documentation
+- **Issues**: [GitHub Issues](https://github.com/PavloGor/laravel-big-calendar-package-implementation/issues)
+- **Frontend**: [Big Calendar](https://github.com/PavloGor/big-calendar)
+
+---
+
+**Package**: `openhands/laravel-big-calendar`  
+**Laravel**: ^12.0  
+**PHP**: ^8.1+  
+**Frontend**: [Big Calendar](https://github.com/PavloGor/big-calendar)
